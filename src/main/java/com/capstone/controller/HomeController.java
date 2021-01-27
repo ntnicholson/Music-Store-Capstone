@@ -12,11 +12,11 @@ public class HomeController {
 
 	@GetMapping(value = "/home")
 	public ModelAndView home() {
-		return new ModelAndView("home.html");
+		return new ModelAndView("home");
 	}
 	@GetMapping(value = "/login")
 	public ModelAndView login() {
-		return new ModelAndView("login.html");
+		return new ModelAndView("thyme/login.html");
 	}
 	@GetMapping(value = "/hello")
 	public ModelAndView hello() {
