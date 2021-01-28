@@ -16,7 +16,7 @@ public class JspViewResolverConfig {
         viewResolver.setViewClass(JstlView.class);
         viewResolver.setPrefix("/WEB-INF/views/"); //WEB-INF/views/
         viewResolver.setSuffix(".jsp");
-        viewResolver.setContentType("text/html");
+        viewResolver.setContentType("application/x-www-form-urlencoded");
         
          
         // Make sure > Thymeleaf order & FreeMarker order.

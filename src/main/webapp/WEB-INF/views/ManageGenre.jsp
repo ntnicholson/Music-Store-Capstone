@@ -34,12 +34,6 @@
 	</table>
 	<br>
 	<br>
-	<div class="btn">
-	<button  type="submit" name="manage" value="Delete" class="btn btn-danger">Delete Task</button>
-	</div>
-	<div class="btn">
-	<button type="submit" name="manage" value="Update" class="btn btn-primary">Update Task</button>
-	</div>
 </form>
 <div class="btn">
 <a href="create"><button type="submit" name="manage" value="Create" class="btn btn-success">Create Task</button></a>

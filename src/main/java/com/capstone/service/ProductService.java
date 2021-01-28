@@ -2,28 +2,29 @@ package com.capstone.service;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.capstone.entity.Genre;
-import com.capstone.repository.GenreRepository;
+import com.capstone.entity.Product;
+import com.capstone.repository.ProductRepository;
 
 @Service
 public class ProductService {
 
 	@Autowired
-	GenreRepository genreRepo;
+	ProductRepository productRepo;
 	
-	public Genre findByID(Long id) {
-		return genreRepo.getOne(id);
+	public Product findByID(Long id) {
+		return productRepo.getOne(id);
 	}
-	public List<Genre> findAll(){
-		return genreRepo.findAll();
+	public List<Product> findAll(){
+		return productRepo.findAll();
 	}
-	public void save(Genre g) {
-		genreRepo.save(g);
+	public void save(Product g) {
+		productRepo.save(g);
 	}
 	public void delete(Long id) {
-		genreRepo.deleteById(id);
+		productRepo.deleteById(id);
 	}
 }
