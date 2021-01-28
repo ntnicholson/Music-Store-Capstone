@@ -20,7 +20,7 @@ public class ProductCatalogController {
 	//Display
 	@GetMapping("/catalog/{id}")
 	public ModelAndView displayAll() {
-		ModelAndView mav = new ModelAndView("ManageProduct", "productList", productService.findAll());
+		ModelAndView mav = new ModelAndView("ProductCatalog", "productList", productService.findAll());
 		
 		return mav;
 	}
