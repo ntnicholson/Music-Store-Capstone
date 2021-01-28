@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +54,7 @@ public class AuthController {
 	JwtUtils jwtUtils;
 
 	@PostMapping("/signin")
-	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+	public ResponseEntity<?> authenticateUser(@Valid LoginRequest loginRequest, HttpServletRequest request) { //@RequestBody
 
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -65,6 +67,15 @@ public class AuthController {
 				.map(item -> item.getAuthority())
 				.collect(Collectors.toList());
 
+		Authentication a = SecurityContextHolder.getContext().getAuthentication();
+		UserDetailsImpl userD = (UserDetailsImpl) a.getPrincipal();	
+		
+		saveSession(new JwtResponse(jwt, 
+				 userDetails.getId(), 
+				 userDetails.getUsername(), 
+				 userDetails.getEmail(), 
+				 roles), request);
+		
 		return ResponseEntity.ok(new JwtResponse(jwt, 
 												 userDetails.getId(), 
 												 userDetails.getUsername(), 
@@ -125,5 +136,9 @@ public class AuthController {
 		userRepository.save(user);
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+	}
+	private void saveSession(JwtResponse jwt, HttpServletRequest r) {
+		HttpSession session = r.getSession();
+		session.setAttribute("SPRING_SECURITY_CONTEXT", jwt);
 	}
 }

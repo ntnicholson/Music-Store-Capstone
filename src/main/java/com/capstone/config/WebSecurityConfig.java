@@ -56,12 +56,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable()
 			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() //STATELESS
 			.authorizeRequests().antMatchers("/**").permitAll() //api/auth/**
 			.antMatchers("/api/test/**").permitAll()
-			.antMatchers("/h2-console/**").permitAll();
-/*			.anyRequest().authenticated()
-			.and() //extra starting here
+			.antMatchers("/h2-console/**").permitAll()
+			.antMatchers("/admin/**").access("hasRole('ROLE_USER')");
+			//.anyRequest().authenticated();
+/*			.and() //extra starting here
 			.formLogin()
 			.loginPage("/login").permitAll()
 			.and()
