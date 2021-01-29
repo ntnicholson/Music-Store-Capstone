@@ -52,8 +52,14 @@ public class User {
 	inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 	
-	@OneToMany(mappedBy = "user")
-    private Set<ShoppingBasket> shoppingCart = new HashSet<>();
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "SHOPPING_CART",
+	joinColumns = @JoinColumn(name = "user_id"), 
+	inverseJoinColumns = @JoinColumn(name = "product_id"))
+	private Set<Product> shoppingCart = new HashSet<>();
+	
+//	@OneToMany(mappedBy = "user")
+//    private Set<ShoppingBasket> shoppingCart = new HashSet<>();
 	
 	public User(String username, String email, String password) {
 		this.username = username;

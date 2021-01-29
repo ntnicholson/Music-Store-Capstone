@@ -2,17 +2,7 @@ package com.capstone.controller;
 
 import java.security.Principal;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpRequest;
-import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,14 +34,16 @@ public class HomeController {
 
 		return mav;
 	}
-	@GetMapping(value = "/showUser")
-	@ResponseBody
-	public String show(HttpServletRequest request) {
-	
-		HttpSession session = request.getSession(true);
-		System.out.println(session.getAttribute("SPRING_SECURITY_CONTEXT"));
-		JwtResponse jwt = (JwtResponse) session.getAttribute("SPRING_SECURITY_CONTEXT");
-		
-		return jwt.getId() + " " + jwt.getUsername();
-	}
+	/*
+	 * @GetMapping(value = "/showUser")
+	 * 
+	 * @ResponseBody public String show(HttpServletRequest request) {
+	 * 
+	 * HttpSession session = request.getSession(true);
+	 * System.out.println(session.getAttribute("SPRING_SECURITY_CONTEXT"));
+	 * JwtResponse jwt = (JwtResponse)
+	 * session.getAttribute("SPRING_SECURITY_CONTEXT");
+	 * 
+	 * return jwt.getId() + " " + jwt.getUsername(); }
+	 */
 }

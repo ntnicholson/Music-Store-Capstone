@@ -137,8 +137,11 @@ public class AuthController {
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
-	private void saveSession(JwtResponse jwt, HttpServletRequest r) {
+	private void saveSession(JwtResponse jwt, HttpServletRequest r) 
+	{
 		HttpSession session = r.getSession();
 		session.setAttribute("SPRING_SECURITY_CONTEXT", jwt);
+		session.setAttribute("CURRENT_USER_ID", jwt.getId());
+		session.setMaxInactiveInterval(30000000);
 	}
 }

@@ -27,4 +27,7 @@ public class ProductService {
 	public void delete(Long id) {
 		productRepo.deleteById(id);
 	}
+	public List<Product> search(String q){
+		return productRepo.search(q.toLowerCase());
+	}
 }
