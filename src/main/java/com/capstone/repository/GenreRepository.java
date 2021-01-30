@@ -8,5 +8,6 @@ import com.capstone.entity.Genre;
 @Repository
 public interface GenreRepository extends JpaRepository<Genre, Long> {
 
+	
 
 }

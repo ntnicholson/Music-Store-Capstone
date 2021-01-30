@@ -7,7 +7,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <%@ include file="bootstrap.html"%>
-<title>Display Category</title>
+<title>Display Tasks</title>
 </head>
 <body>
 <jsp:include page="dynamicNavbar.jsp" />
@@ -19,14 +19,16 @@
 			<tr>
 				<th>ID</th>
 				<th>Name</th>
+				<th>Genre</th>
 				<th>Manage</th>
 			</tr>
-						<c:forEach items="${genreList}" var="genreList">
+			<c:forEach items="${categoryList}" var="categoryList">
 				<tr>
-					<td><c:out value="${genreList.id}"></c:out></td>
-					<td><c:out value="${genreList.name}"></c:out></td>
-					<td><a href="update/${genreList.id}" type="submit"><i class="material-icons">edit</i></a>
-					<a href="delete/${genreList.id}" type="submit" id="${genreList.id}"><i class="material-icons">delete</i></a>
+					<td><c:out value="${categoryList.id}"></c:out></td>
+					<td><c:out value="${categoryList.name}"></c:out></td>
+					<td><c:out value="${categoryList.genre.name}"></c:out></td>
+					<td><a href="update/${categoryList.id}" type="submit"><i class="material-icons">edit</i></a>
+					<a href="delete/${categoryList.id}" type="submit" id="${categoryList.id}"><i class="material-icons">delete</i></a>
 					</td>
 				</tr>
 			</c:forEach>
@@ -36,7 +38,7 @@
 	<br>
 </form>
 <div class="btn">
-<a href="create"><button type="submit" name="manage" value="Create" class="btn btn-success">Create Genre</button></a>
+<a href="create"><button type="submit" name="manage" value="Create" class="btn btn-success">Create Task</button></a>
 </div>
 </div>
 </div>

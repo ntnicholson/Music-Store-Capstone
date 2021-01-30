@@ -1,7 +1,9 @@
 package com.capstone.entity;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,10 +27,9 @@ public class Genre {
 
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
 	private String name;
 	
-	@OneToMany()
-	private Map<Long, Category> subGenres = new HashMap<>();
+	@OneToMany(mappedBy = "genre")
+	private Set<Category> subGenres = new HashSet<>();
 	
 }
