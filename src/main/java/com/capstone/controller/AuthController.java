@@ -1,11 +1,14 @@
 package com.capstone.controller;
 
 import java.util.HashSet;
+
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -54,7 +57,7 @@ public class AuthController {
 	JwtUtils jwtUtils;
 
 	@PostMapping("/signin")
-	public ResponseEntity<?> authenticateUser(@Valid LoginRequest loginRequest, HttpServletRequest request) { //@RequestBody
+	public ResponseEntity<?> authenticateUser(@Valid LoginRequest loginRequest, HttpServletRequest request, HttpServletResponse response) { //@RequestBody
 
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -70,12 +73,22 @@ public class AuthController {
 		Authentication a = SecurityContextHolder.getContext().getAuthentication();
 		UserDetailsImpl userD = (UserDetailsImpl) a.getPrincipal();	
 		
-		saveSession(new JwtResponse(jwt, 
+		JwtResponse head = new JwtResponse(jwt, 
 				 userDetails.getId(), 
 				 userDetails.getUsername(), 
 				 userDetails.getEmail(), 
-				 roles), request);
+				 roles);
+		//session
+		saveSession(head, request);
 		
+		//cookie
+		Cookie cookie = new Cookie("jwt", head.getToken() + head.getType() + head.getId() + head.getUsername() + head.getRoles()); //name and value of the cookie
+		cookie.setMaxAge(6000000); //expire could be 60 (seconds)
+		//cookie.setHttpOnly(true);
+		cookie.setPath("/");
+		
+		response.addCookie(cookie);
+
 		return ResponseEntity.ok(new JwtResponse(jwt, 
 												 userDetails.getId(), 
 												 userDetails.getUsername(), 

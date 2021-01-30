@@ -30,6 +30,6 @@ public class Genre {
 	private String name;
 	
 	@OneToMany(mappedBy = "genre")
-	private Set<Category> subGenres = new HashSet<>();
+	private Set<Category> Category = new HashSet<>();
 	
 }

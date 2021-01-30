@@ -58,8 +58,6 @@ public class User {
 	inverseJoinColumns = @JoinColumn(name = "product_id"))
 	private Set<Product> shoppingCart = new HashSet<>();
 	
-//	@OneToMany(mappedBy = "user")
-//    private Set<ShoppingBasket> shoppingCart = new HashSet<>();
 	
 	public User(String username, String email, String password) {
 		this.username = username;

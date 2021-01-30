@@ -4,8 +4,10 @@ import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,8 +17,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.capstone.payload.response.JwtResponse;
 import com.capstone.security.services.UserDetailsServiceImpl;
 
 public class AuthTokenFilter extends OncePerRequestFilter {
@@ -29,10 +33,15 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 	private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
 
 	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,FilterChain filterChain)
 			throws ServletException, IOException {
-		try {
-			String jwt = parseJwt(request);
+		try {//custom for cookies
+			//String jwt = parseJwt(request);
+
+			 HttpSession session = request.getSession(true);
+			 JwtResponse j = (JwtResponse)session.getAttribute("SPRING_SECURITY_CONTEXT");
+			 System.out.println(j.toString());
+			String jwt = j.getToken();
 			if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
 				String username = jwtUtils.getUserNameFromJwtToken(jwt);
 

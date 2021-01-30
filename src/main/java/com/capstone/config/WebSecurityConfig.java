@@ -57,10 +57,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.cors().and().csrf().disable()
 			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() //STATELESS
-			.authorizeRequests().antMatchers("/**").permitAll() //api/auth/**
+			.authorizeRequests().antMatchers("/api/auth/**").permitAll() //
 			.antMatchers("/api/test/**").permitAll()
 			.antMatchers("/h2-console/**").permitAll()
-			.antMatchers("/admin/**").access("hasRole('ROLE_USER')");
+			.antMatchers("/admin/**").hasRole("ADMIN")//access("hasRole('ROLE_ADMIN')");
 			//.anyRequest().authenticated();
 /*			.and() //extra starting here
 			.formLogin()
@@ -68,6 +68,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 			.logout().permitAll()
 			.and();*/
+			.and()
+			.exceptionHandling().accessDeniedPage("/login");
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 		http.headers().frameOptions().sameOrigin();

@@ -29,7 +29,7 @@ public class ThymeleafViewResolverConfig{
  
         // Important!!
         // thyme/page1.html, th_page2.html, ...
-        viewResolver.setViewNames(new String[] { "thyme/*" });
+        viewResolver.setViewNames(new String[] { "th/*" });
  
         return viewResolver;
     }
