@@ -11,11 +11,11 @@
 }</style>
 <head>
 <meta charset="ISO-8859-1">
-<%@ include file="bootstrap.html"%>
+<%-- <%@ include file="../views/css/bootstrap.html"%> --%>
 <title>Display Products</title>
 </head>
 <body>
-<jsp:include page="dynamicNavbar.jsp" />
+<jsp:include page="adminDasboard.jsp" />
 <br/>
 <div class="container">
 <form method="post">
@@ -29,7 +29,6 @@
 				<th>Description</th>
 				<th>Price</th>
 				<th>Inventory</th>
-<!-- 				<th>Hidden</th> -->
 				<th>Manage</th>
 			</tr>
 			<c:forEach items="${productList}" var="productList">

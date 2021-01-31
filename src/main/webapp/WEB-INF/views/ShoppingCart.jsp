@@ -12,7 +12,7 @@
 </style>
 <head>
 <meta charset="ISO-8859-1">
-<%@ include file="bootstrap.html"%>
+<%@ include file="../views/css/bootstrap.html"%>
 <title>Shopping Cart</title>
 </head>
 <body>

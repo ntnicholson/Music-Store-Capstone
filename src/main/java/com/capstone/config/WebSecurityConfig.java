@@ -69,7 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.logout().permitAll()
 			.and();*/
 			.and()
-			.exceptionHandling().accessDeniedPage("/login");
+			.exceptionHandling().accessDeniedPage("/accessdenied");
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 		http.headers().frameOptions().sameOrigin();

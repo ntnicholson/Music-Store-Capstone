@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<%@ include file="bootstrap.html"%>
+<%@ include file="../views/css/bootstrap.html"%>
 <title>Display Tasks</title>
 </head>
 <body>

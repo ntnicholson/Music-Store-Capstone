@@ -7,7 +7,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Create Task</title>
-<%@ include file="bootstrap.html"%>
+<%@ include file="../views/css/bootstrap.html"%>
 </head>
 <body style="background-color:forestgreen;">
 <jsp:include page="dynamicNavbar.jsp" />

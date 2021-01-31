@@ -13,7 +13,7 @@ int counter = 0;
 </style>
 <head>
 <meta charset="ISO-8859-1">
-<%@ include file="bootstrap.html"%>
+<%@ include file="../views/css/bootstrap.html"%>
 <title>Display Products</title>
 </head>
 <body>

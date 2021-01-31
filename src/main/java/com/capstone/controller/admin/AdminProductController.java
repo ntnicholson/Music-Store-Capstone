@@ -46,7 +46,7 @@ public class AdminProductController {
 	//Display
 	@GetMapping("/manage")
 	public ModelAndView displayAll() {
-		ModelAndView mav = new ModelAndView("ManageProduct", "productList", productService.findAll());
+		ModelAndView mav = new ModelAndView("ManageProductfrag", "productList", productService.findAll());
 		
 		return mav;
 	}

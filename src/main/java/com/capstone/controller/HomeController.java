@@ -1,6 +1,11 @@
 package com.capstone.controller;
 
+import java.io.IOException;
 import java.security.Principal;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -27,12 +32,17 @@ public class HomeController {
 	@GetMapping(value = "/home")
 	@PreAuthorize("hasRole('ROLE_USER')")
 	public ModelAndView home() {
-		return new ModelAndView("th/home.html");
+		return new ModelAndView("home");
 	}
 	@GetMapping(value = "/login")
 	public ModelAndView login() {
-		System.out.println("inlogin");
 		return new ModelAndView("th/login.html", "userLogin", new LoginRequest());
+	}
+	@GetMapping(value = "/logout")
+	public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HttpSession s = request.getSession();
+		s.invalidate();
+		response.sendRedirect("/home");
 	}
 
 	@GetMapping(value = "/register")

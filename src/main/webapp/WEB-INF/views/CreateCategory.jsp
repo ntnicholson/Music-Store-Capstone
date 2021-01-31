@@ -8,7 +8,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Create Category</title>
-<%@ include file="bootstrap.html"%>
+<%@ include file="../views/css/bootstrap.html"%>
 </head>
 <body style="background-color: forestgreen;">
 	<br />
