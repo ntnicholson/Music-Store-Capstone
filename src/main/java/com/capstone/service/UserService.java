@@ -27,6 +27,11 @@ public class UserService {
 		return uRepo.getOne(id);
 	}
 	@Transactional
+	public void updateDetails(User u) {
+		//em.
+		em.merge(u);	
+	}
+	@Transactional
 	public void addToCart(User u) {
 		em.merge(u);	
 	}

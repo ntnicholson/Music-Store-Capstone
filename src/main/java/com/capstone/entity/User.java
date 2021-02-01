@@ -19,6 +19,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import org.springframework.lang.Nullable;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -58,6 +60,20 @@ public class User {
 	inverseJoinColumns = @JoinColumn(name = "product_id"))
 	private Set<Product> shoppingCart = new HashSet<>();
 	
+	@Nullable
+	private Long phone;
+	@Nullable
+	private String streetName;
+	@Nullable
+	private String apartmentNumber;
+	@Nullable
+	private String city;
+	@Nullable
+	private String state;
+	@Nullable
+	private String country;
+	@Nullable
+	private Long zipCode;
 	
 	public User(String username, String email, String password) {
 		this.username = username;

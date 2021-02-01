@@ -3,15 +3,24 @@ package com.capstone.controller;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.capstone.entity.Genre;
 import com.capstone.entity.Product;
+import com.capstone.entity.User;
 import com.capstone.service.ProductService;
 import com.capstone.service.UserService;
 
@@ -45,6 +54,20 @@ public class UserDashboard {
 	public void removeFromCart(@SessionAttribute("CURRENT_USER_ID") Long sessionID, @PathVariable("id") Long id, HttpServletResponse response) throws IOException 
 	{
 		uService.removeFromCart(uService.findByID(sessionID), pService.findByID(id));
+		response.sendRedirect("/cart");
+	}
+	@GetMapping(value="/update/details")
+	@PreAuthorize("hasRole('ROLE_USER')")
+	public ModelAndView updateTask(@SessionAttribute("CURRENT_USER_ID") Long sessionID) 
+	{
+		User u = uService.findByID(sessionID);
+		return new ModelAndView("UpdateUserDetails", "user", u);
+	}
+	@PostMapping(value="/update/details") @Transactional
+	public void updateDetails(@Valid @ModelAttribute("user") User u, BindingResult bindingResult, 
+			Model model, HttpServletResponse response) throws IOException {
+		
+		uService.updateDetails(u);
 		response.sendRedirect("/cart");
 	}
 

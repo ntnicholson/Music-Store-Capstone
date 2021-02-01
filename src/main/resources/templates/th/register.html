@@ -8,6 +8,11 @@
   integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
   crossorigin="anonymous"
 />
+<style type="text/css">
+ #role{
+/*  display: none; */
+ }
+</style>
 </head>
 <body class="hold-transition register-page">
   <div class="register-box">
@@ -28,7 +33,7 @@
         </div>
       </div>
         <div>
-          <input type="hidden" class="form-control"  th:field="*{role}" placeholder="Role" th:errorclass="is-invalid" th:placeholder="ROLE_USER" >
+          <input type="text" id="role" class="form-control"  placeholder="Role" th:value="ROLE_USER">
         </div>
        <div class="input-group mb-3">          
        <div class="input-group-append">
@@ -55,7 +60,7 @@
             </div>
           </div>
         </div>
-        <button type="submit">Submit</button>
+        <button class="btn btn-success" type="submit">Submit</button>
         </form>
     </div>
     <!-- /.form-box -->
