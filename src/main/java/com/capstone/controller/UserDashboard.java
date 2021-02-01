@@ -1,7 +1,11 @@
 package com.capstone.controller;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -19,8 +23,10 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.capstone.entity.Genre;
+import com.capstone.entity.Orders;
 import com.capstone.entity.Product;
 import com.capstone.entity.User;
+import com.capstone.service.OrderService;
 import com.capstone.service.ProductService;
 import com.capstone.service.UserService;
 
@@ -29,9 +35,15 @@ public class UserDashboard {
 
 	@Autowired
 	UserService uService;
+	@Autowired
+	OrderService oService;
 
 	@Autowired
+	EntityManager em;
+	
+	@Autowired
 	ProductService pService;
+	
 	
 	@GetMapping("/dashboard")
 	public String dashboard() {
@@ -68,6 +80,22 @@ public class UserDashboard {
 			Model model, HttpServletResponse response) throws IOException {
 		
 		uService.updateDetails(u);
+		response.sendRedirect("/cart");
+	}
+	@GetMapping(value="/confirm/details")
+	public ModelAndView confirmAddress(@SessionAttribute("CURRENT_USER_ID") Long sessionID) {
+		User u = uService.findByID(sessionID);
+		return new ModelAndView("ConfirmUserDetails", "user", u);
+	}
+	@GetMapping(value="/submit/order")
+	public void submitOrder(@SessionAttribute("CURRENT_USER_ID") Long sessionID, HttpServletResponse response) throws IOException {
+		User u = uService.findByID(sessionID);
+		Orders o = new Orders();
+		Set<Product> orders = new HashSet<Product>(u.getShoppingCart());
+		o.setOrders((Set<Product>) orders);
+		oService.saveOrder(o);
+		//empty cart
+		uService.removeAllFromCart(u);
 		response.sendRedirect("/cart");
 	}
 

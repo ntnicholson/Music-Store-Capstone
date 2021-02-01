@@ -88,7 +88,7 @@
 							href="/admin/category/manage"> <span
 								data-feather="bar-chart-2"></span> Categories
 						</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"> <span
+						<li class="nav-item"><a class="nav-link" href="/admin/orders/manage"> <span
 								data-feather="layers"></span> Orders
 						</a></li>
 					</ul>
@@ -133,6 +133,7 @@
 											<th>ID</th>
 											<th>Image</th>
 											<th>Name</th>
+											<th>Category</th>
 											<th>Condition</th>
 											<th>Description</th>
 											<th>Price</th>
@@ -146,6 +147,7 @@
 														src="data:image/jpg;base64,${productList.base64Image}"
 														alt="No image"></a></td>
 												<td><c:out value="${productList.name}"></c:out></td>
+												<td><c:out value="${productList.category.name}"></c:out></td>
 												<td><c:out value="${productList.condition}"></c:out></td>
 												<td><c:out value="${productList.description}"></c:out></td>
 												<td><c:out value="${productList.price}"></c:out></td>

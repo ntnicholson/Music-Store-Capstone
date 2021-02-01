@@ -40,8 +40,11 @@ public class UserService {
 		u.getShoppingCart().remove(p);
 		em.merge(u);
 	}
-	public void removeAllFromCart(User u, List<Product> cart) {
+	@Transactional
+	public void removeAllFromCart(User u) {
+		Set<Product> cart = u.getShoppingCart();
 		u.getShoppingCart().removeAll(cart);
+		//u.setShoppingCart(null);
 		em.merge(u);
 	}
 	

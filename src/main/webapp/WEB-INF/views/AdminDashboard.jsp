@@ -89,7 +89,7 @@
 							href="/admin/category/manage"> <span
 								data-feather="bar-chart-2"></span> Categories
 						</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"> <span
+						<li class="nav-item"><a class="nav-link" href="/admin/orders/manage"> <span
 								data-feather="layers"></span> Orders
 						</a></li>
 					</ul>

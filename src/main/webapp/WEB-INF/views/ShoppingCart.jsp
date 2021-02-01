@@ -16,9 +16,23 @@
 <title>Shopping Cart</title>
 </head>
 <body>
-	<jsp:include page="dynamicNavbar.jsp" />
+<header>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end fixed-top">
+  <ul class="navbar-nav">
+
+    <li class="nav-item">
+      <a class="nav-link" >|</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/logout">Logout</a>
+    </li>
+  </ul>
+</nav>
+</header>
+<br /><br />
 	<br />
-	<div class="container d-flex justify-content-end">
+	<main>
+		<div class="container d-flex justify-content-end">
 			<form method="post" action="">
 				<div class="col-md-8">
 					<table class="table table-borderless" id="productTable">
@@ -56,9 +70,11 @@
 				</div>
 				
 			</form><div class="btn">
-				<a href="create"><button type="submit" name="manage"
-						value="Create" class="btn btn-success">Complete Order</button></a>
+				<a href="/confirm/details"><button type="submit" name="manage"
+				 class="btn btn-success">Complete Order</button></a>
 			</div>
 		</div>
+	</main>
+
 </body>
 </html>

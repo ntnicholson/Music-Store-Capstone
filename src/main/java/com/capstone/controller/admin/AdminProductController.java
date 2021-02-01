@@ -4,6 +4,7 @@ package com.capstone.controller.admin;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,8 +32,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.capstone.entity.Category;
+import com.capstone.entity.Genre;
 import com.capstone.entity.Product;
 import com.capstone.entity.Song;
+import com.capstone.service.CategoryService;
 import com.capstone.service.ProductService;
 
 @RestController
@@ -40,6 +45,9 @@ public class AdminProductController {
 	
 	@Autowired
 	ProductService productService;
+	
+	@Autowired
+	CategoryService categoryService;
 	
 	@Autowired
 	EntityManager em;
@@ -54,9 +62,12 @@ public class AdminProductController {
 	
 	//Create
 	@GetMapping(value="/create")
-	public ModelAndView createProduct() 
+	public ModelAndView createProduct(ModelMap m) 
 	{
-		Product p = new Product();
+        Product p = new Product();
+		List<Category> categoryList = categoryService.findAll();
+		m.addAttribute("newProduct", p);
+		m.addAttribute("categoryList", categoryList);
 		return new ModelAndView("CreateProduct", "newProduct", p);
 	}
 	@PostMapping(value="/create") @Transactional
@@ -89,17 +100,26 @@ public class AdminProductController {
 	}
 	
 	@GetMapping(value="/update/{id}")
-	public ModelAndView updateTask(@PathVariable("id") Long id) 
+	public ModelAndView updateProduct(@PathVariable("id") Long id, ModelMap m) 
 	{
-		Product g = productService.findByID(id);
-		return new ModelAndView("UpdateProduct", "product", g);
+        Product p = new Product();
+		List<Category> categoryList = categoryService.findAll();
+		m.addAttribute("newProduct", p);
+		m.addAttribute("categoryList", categoryList);
+		return new ModelAndView("CreateProduct", "newProduct", p);
 	}
 	@PostMapping(value="/update/{id}") @Transactional
-	public void updateTask(@Valid @ModelAttribute("newProduct") Product g, BindingResult bindingResult, 
-			Model model, HttpServletResponse response) throws IOException {
+	public void updateProduct(@Valid @ModelAttribute("newProduct") Product p, BindingResult bindingResult, 
+			Model model, HttpServletResponse response, @RequestParam("image") MultipartFile f) throws IOException
+	{
+		byte[] picInBytes = new byte[(int) f.getBytes().length];
+		picInBytes = f.getBytes();
+		p.setImage(picInBytes);
+		byte[] encodeBase64 = Base64.encodeBase64(picInBytes); //https://stackoverflow.com/questions/34560229/convert-byte-to-image-and-display-on-jsp
+        String base64Encoded = new String(encodeBase64, "UTF-8");
+        p.setBase64Image(base64Encoded);
 		
-		//taskService.saveTask(t);
-		em.merge(g);
+        em.merge(p);
 		response.sendRedirect("/admin/product/manage");
 	}
 	//Create

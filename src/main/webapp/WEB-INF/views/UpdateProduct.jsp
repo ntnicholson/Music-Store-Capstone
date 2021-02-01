@@ -1,22 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-	<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="ISO-8859-1">
-<title>Create Task</title>
 <%@ include file="../views/css/bootstrap.html"%>
+<title>Update Category</title>
 </head>
-<body style="background-color:forestgreen;">
+<body style="background-color:skyblue;">
 <jsp:include page="dynamicNavbar.jsp" />
 <br/>
 	<div class="d-flex justify-content-center align-items-center container ">
-	<h2 style="color:white;"> Create Product </h2>
+	<h2 style="color:white;"> Update Category</h2>
 		<div class="form-control">
-		<form method="post" enctype="multipart/form-data">
+		<form method="post">
 			<div class="input-group mb-3">
 				<span class="input-group-text" id="basic-addon1">Name</span> 
 				<input type="text" name="name" class="form-control" required><br /></div>
@@ -49,19 +48,13 @@
 			<span class="input-group-text" id="basic-addon1">Inventory Count</span> 
 			<input type="number" placeholder="Number of products available for sell..." name="inventoryCount" class="form-control"><br /></div>
 			
-<!-- 			<div class="input-group mb-3"> -->
-<!-- 			<span class="input-group-text" id="basic-addon1">Hidden </span>  -->
-<!-- 			<input type="radio" placeholder="Price..." name="true" value="True" class="form-control"><br /> -->
-<!-- 			<input type="radio" placeholder="Price..." name="false" class="form-control"><br /></div> -->
-
 		<div class="btn btn-group">
-			<div class="btn"><button type="reset" class="btn btn-danger form-control">Clear</button></div>
+			<div class="btn"><button type="reset" class="btn btn-danger form-control">Reset</button></div>
 			<br />
-			<div class="btn"><button type="submit" class="btn btn-primary">Submit</button></div>
+			<div class="btn"><button type="submit" class="btn btn-success">Submit</button></div>
 			<br />
 			</div>
 		</form>
-	</div>
 	</div>
 	</div>
 </body>

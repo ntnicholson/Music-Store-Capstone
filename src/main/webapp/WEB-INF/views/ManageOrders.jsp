@@ -51,8 +51,7 @@
 
 	<header
 		class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-		<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Company
-			name</a>
+		<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/home">Music Store</a>
 		<button class="navbar-toggler position-absolute d-md-none collapsed"
 			type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
 			aria-controls="sidebarMenu" aria-expanded="false"
@@ -73,25 +72,24 @@
 				class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
 				<div class="position-sticky pt-3">
 					<ul class="nav flex-column">
-						<li class="nav-item"><a class="nav-link"
-							aria-current="page" href="#"> <span data-feather="home"></span>
+						<li class="nav-item"><a class="nav-link" aria-current="page"
+							href="/admin/dashboard"> <span data-feather="home"></span>
 								Dashboard
 						</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"> <span
-								data-feather="file"></span> Orders
-						</a></li>
-						<li class="nav-item"><a class="nav-link active"
+						<li class="nav-item"><a class="nav-link"
 							href="/admin/product/manage"> <span
 								data-feather="shopping-cart"></span> Products
 						</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"> <span
-								data-feather="users"></span> Customers
+						<li class="nav-item"><a class="nav-link"
+							href="/admin/genre/manage"> <span data-feather="users"></span>
+								Genres
 						</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"> <span
-								data-feather="bar-chart-2"></span> Genres
+						<li class="nav-item"><a class="nav-link"
+							href="/admin/category/manage"> <span
+								data-feather="bar-chart-2"></span> Categories
 						</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"> <span
-								data-feather="layers"></span> Integrations
+						<li class="nav-item"><a class="nav-link active" href="/admin/orders/manage"> <span
+								data-feather="layers"></span> Orders
 						</a></li>
 					</ul>
 
@@ -121,11 +119,8 @@
 
 			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-					<h2>Manage Products</h2>
-						<div class="btn">
-						<a href="create"><button type="submit" name="manage" value="Create" class="btn btn-sm btn-success">Create
-										Product</button></a>
-							</div>
+					<h2>Manage Orders</h2>
+						
 				</div>		
 						<%-- <div class="table-responsive"> --%>
 						<div class="table-responsive">
@@ -134,30 +129,15 @@
 									<tbody>
 										<tr>
 											<th>ID</th>
-											<th>Image</th>
-											<th>Name</th>
-											<th>Condition</th>
-											<th>Description</th>
-											<th>Price</th>
-											<th>Inventory</th>
+											<th>Status</th>
 											<th>Manage</th>
 										</tr>
-										<c:forEach items="${productList}" var="productList">
+										<c:forEach items="${orderList}" var="orderList">
 											<tr>
-												<td><c:out value="${productList.id}"></c:out></td>
-												<td><a href=# target=_blank><img
-														src="data:image/jpg;base64,${productList.base64Image}"
-														alt="No image"></a></td>
-												<td><c:out value="${productList.name}"></c:out></td>
-												<td><c:out value="${productList.condition}"></c:out></td>
-												<td><c:out value="${productList.description}"></c:out></td>
-												<td><c:out value="${productList.price}"></c:out></td>
-												<td><c:out value="${productList.inventoryCount}"></c:out></td>
-												<%-- 					<td><c:out value="${productList.available}"></c:out></td> --%>
-												<td><a href="update/${productList.id}" type="submit"><i
-														class="material-icons">edit</i></a> <a
-													href="delete/${productList.id}" type="submit"><i
-														class="material-icons">delete</i></a></td>
+												<td><c:out value="${orderList.id}"></c:out></td>
+												<td><c:out value="${orderList.status}"></c:out></td>
+												<td><a href="update/${orderList.id}" type="submit"><i
+														class="material-icons">edit</i></a></td>
 											</tr>
 										</c:forEach>
 									</tbody>

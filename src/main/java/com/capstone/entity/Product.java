@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -52,7 +53,8 @@ public class Product {
 	@ManyToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL)
 	private Set<User> productInCart = new HashSet<>();
 	
-//	@OneToMany(mappedBy = "product")
-//	private Set<Song> song = new HashSet<>();
+	@ManyToOne @Nullable
+	@JoinColumn(name="category_id", nullable=true)
+	private Category category;
 	
 }

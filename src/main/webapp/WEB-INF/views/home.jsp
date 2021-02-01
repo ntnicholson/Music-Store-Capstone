@@ -29,6 +29,11 @@
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
         }
+        #carou img{
+	max-width:100%;
+max-height:100%;
+object-fit: contain;
+}
       }
     </style>
 
@@ -79,9 +84,11 @@
       <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
       <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
     </ol>
-    <div class="carousel-inner">
+    <div class="carousel-inner" id="carou">
       <div class="carousel-item active">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
+        <svg class="bd-placeholder-img" width="100%" height="100%"  aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/>
+        <image id="image" href="<c:url value="https://images.pexels.com/photos/1407322/pexels-photo-1407322.jpeg"/>"/>
+        </svg>
 
         <div class="container">
           <div class="carousel-caption text-start">
