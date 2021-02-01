@@ -57,9 +57,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.cors().and().csrf().disable()
 			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() //STATELESS
-			.authorizeRequests().antMatchers("/api/auth/**").permitAll() //
+			.authorizeRequests().antMatchers("/api/auth/**").permitAll()
 			.antMatchers("/api/test/**").permitAll()
-			.antMatchers("/h2-console/**").permitAll()
+			.antMatchers("/home", "product/catalog/**", "/h2-console/**").permitAll()
 			.antMatchers("/admin/**").hasRole("ADMIN")//access("hasRole('ROLE_ADMIN')");
 			//.anyRequest().authenticated();
 /*			.and() //extra starting here

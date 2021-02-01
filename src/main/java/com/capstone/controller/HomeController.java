@@ -30,7 +30,6 @@ public class HomeController {
 //    }
     
 	@GetMapping(value = "/home")
-	@PreAuthorize("hasRole('ROLE_USER')")
 	public ModelAndView home() {
 		return new ModelAndView("home");
 	}

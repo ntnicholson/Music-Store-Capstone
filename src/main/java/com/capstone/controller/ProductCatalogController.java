@@ -1,9 +1,11 @@
 package com.capstone.controller;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,7 +40,7 @@ public class ProductCatalogController {
 		
 		return mav;
 	}
-	@PostMapping("/catalog/search")
+	@PostMapping("/catalog")
 	public ModelAndView search(@RequestParam("query") String query) {
 		System.out.println(query);
 		ModelAndView mav = new ModelAndView("ProductCatalog", "productList", productService.search(query));
@@ -54,7 +56,7 @@ public class ProductCatalogController {
 	}
 	@PostMapping("/{id}")
 	@ResponseBody
-	public String addtoCart(@PathVariable("id") Long id, @SessionAttribute("CURRENT_USER_ID") Long sessionID) 
+	public void addtoCart(@PathVariable("id") Long id, @SessionAttribute("CURRENT_USER_ID") Long sessionID, HttpServletResponse response) throws IOException 
 	{
 		User u = userService.findByID(sessionID);
 		Set<Product> p = u.getShoppingCart();
@@ -63,8 +65,6 @@ public class ProductCatalogController {
 
 		userService.addToCart(u);
 		
-		//ModelAndView mav = new ModelAndView("ProductDetails", "product", );
-		
-		return "Saved to cart";
+		response.sendRedirect("/cart");
 	}
 }

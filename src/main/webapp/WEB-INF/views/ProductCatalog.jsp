@@ -23,7 +23,7 @@ int counter = 0;
 	<div class="container">
 		<div class="row g-4">
 			<div class="form-group">
-				<form class="form-inline" method="post" action="search">
+				<form class="form-inline" method="post" action="">
 					<input type="text" class="form-control" placeholder="Search.."
 						name="query" id="searchString">
 					<button class="btn btn-dark btn-sm form-control" type="submit">

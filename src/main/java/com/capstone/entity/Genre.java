@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,7 +30,7 @@ public class Genre {
 	private Long id;
 	private String name;
 	
-	@OneToMany(mappedBy = "genre")
+	@OneToMany(mappedBy = "genre", cascade = CascadeType.REMOVE)
 	private Set<Category> Category = new HashSet<>();
 	
 }

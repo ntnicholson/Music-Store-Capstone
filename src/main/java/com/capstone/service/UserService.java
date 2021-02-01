@@ -30,6 +30,15 @@ public class UserService {
 	public void addToCart(User u) {
 		em.merge(u);	
 	}
+	@Transactional
+	public void removeFromCart(User u, Product p) {
+		u.getShoppingCart().remove(p);
+		em.merge(u);
+	}
+	public void removeAllFromCart(User u, List<Product> cart) {
+		u.getShoppingCart().removeAll(cart);
+		em.merge(u);
+	}
 	
 	public Set<Product> getCartList(Long id){
 		return uRepo.getShoppingCartByUserID(id);
