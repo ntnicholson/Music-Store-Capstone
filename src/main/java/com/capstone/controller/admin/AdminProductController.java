@@ -31,6 +31,7 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.capstone.entity.Product;
+import com.capstone.entity.Song;
 import com.capstone.service.ProductService;
 
 @RestController
@@ -101,4 +102,25 @@ public class AdminProductController {
 		em.merge(g);
 		response.sendRedirect("/admin/product/manage");
 	}
+	//Create
+	@GetMapping(value="/create/song")
+	public ModelAndView createSong() 
+	{
+		Product p = new Song();
+		return new ModelAndView("CreateSong", "newSong", p);
+	}
+	@PostMapping(value="/create/song") @Transactional
+	public void saveSong(@Valid @ModelAttribute("newSong") Song p, BindingResult bindingResult, 
+			Model model, HttpServletResponse response, @RequestParam("image") MultipartFile f) throws IOException
+	{
+		byte[] picInBytes = new byte[(int) f.getBytes().length];
+		picInBytes = f.getBytes();
+		p.setImage(picInBytes);
+		byte[] encodeBase64 = Base64.encodeBase64(picInBytes); //https://stackoverflow.com/questions/34560229/convert-byte-to-image-and-display-on-jsp
+        String base64Encoded = new String(encodeBase64, "UTF-8");
+        p.setBase64Image(base64Encoded);
+		productService.save(p);
+		response.sendRedirect("/admin/product/manage");
+	}
+
 }

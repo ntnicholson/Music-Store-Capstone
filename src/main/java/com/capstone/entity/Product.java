@@ -9,12 +9,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.lang.Nullable;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,6 +32,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Product {
 
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,9 +42,9 @@ public class Product {
 	private String condition;
 	private String description;
 	private double price;
-	@Lob
+	@Lob @Nullable
 	private byte[] image;
-	@Lob
+	@Lob @Nullable
 	private String base64Image;
 	private Integer inventoryCount;
 //	private boolean available;
@@ -47,7 +52,7 @@ public class Product {
 	@ManyToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL)
 	private Set<User> productInCart = new HashSet<>();
 	
-	@OneToMany(mappedBy = "product")
-	private Set<Song> song = new HashSet<>();
+//	@OneToMany(mappedBy = "product")
+//	private Set<Song> song = new HashSet<>();
 	
 }
