@@ -3,6 +3,7 @@ package com.capstone.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -43,7 +44,7 @@ public class Product {
 	private Integer inventoryCount;
 //	private boolean available;
 	
-	@ManyToMany(mappedBy = "shoppingCart")
+	@ManyToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL)
 	private Set<User> productInCart = new HashSet<>();
 	
 	@OneToMany(mappedBy = "product")

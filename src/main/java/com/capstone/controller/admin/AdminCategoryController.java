@@ -65,7 +65,6 @@ public class AdminCategoryController {
 	public void saveCategory(@Valid @ModelAttribute("newCategory") Category c, BindingResult bindingResult, 
 			Model model, HttpServletResponse response) throws IOException
 	{
-		System.out.println(c.getGenre().getId());
 		categoryService.save(c);
 		response.sendRedirect("/admin/category/manage");
 	}
@@ -85,17 +84,19 @@ public class AdminCategoryController {
 	}
 	
 	@GetMapping(value="/update/{id}")
-	public ModelAndView updateCategory(@PathVariable("id") Long id) 
+	public ModelAndView updateCategory(@PathVariable("id") Long id, ModelMap m) 
 	{
-		Category g = categoryService.findByID(id);
-		return new ModelAndView("UpdateCategory", "category", g);
+		Category c = categoryService.findByID(id);
+		List<Genre> genreList = genreService.findAll();
+		m.addAttribute("category", c);
+		m.addAttribute("genreList", genreList);
+		return new ModelAndView("UpdateCategory", "category", m);
 	}
 	@PostMapping(value="/update/{id}") @Transactional
-	public void updateCategory(@Valid @ModelAttribute("newCategory") Category g, BindingResult bindingResult, 
+	public void updateCategory(@Valid @ModelAttribute("category") Category c, BindingResult bindingResult, 
 			Model model, HttpServletResponse response) throws IOException {
 		
-		//taskService.saveCategory(t);
-		em.merge(g);
+		em.merge(c);
 		response.sendRedirect("/admin/category/manage");
 	}
 }
