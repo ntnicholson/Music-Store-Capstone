@@ -8,7 +8,9 @@ int counter = 0;
 <html>
 <style>
 #cardImage img {
-	object-fit: contain;
+max-width: 100%;
+max-height: 100%;
+
 }
 </style>
 <head>
@@ -19,31 +21,27 @@ int counter = 0;
 <body>
 	<jsp:include page="dynamicNavbar.jsp" />
 	<br />
-	<div class="container">	
-		<div class="row row-cols-1 row-cols-md-3 g-4">
-		<form class="form" method="post">
-		<div class="" id="cardImage">
-					<div class="card">
-						<a href=# target=_blank><img class="card-img-top"
-							src="data:image/jpg;base64,${product.base64Image}"
-							alt="No image"></a>
-						<div class="card-body">
-							<h4 class="card-title">
-								<c:out value="${product.name}"></c:out>
-							</h4>
-							<h6 class="card-subtitle mb-2 text-muted">
-								$
-								<c:out value="${product.price}"></c:out>
-							</h6>
-							<c:out value="${product.id}"></c:out>
-							<%-- 					<td><c:out value="${productList.available}"></c:out></td> --%>
-						</div>
-					<button class="btn btn-default" type="submit">Add to Cart</button></a>
-					</div>
-				</div>
-				</form>
+	<div class="justify-content-center container">	
+	<div class="card mb-3" style="max-width: auto;">
+  <div class="row g-0">
+    <div class="col-md-4" id="cardImage">
+      <img src="data:image/jpg;base64,${product.base64Image}" alt="...">
+    </div>
+    <div class="col-md-8">
+    <form method="post">
+      <div class="card-body">
+        <h3 class="card-title"><em><c:out value="${product.name}"></c:out></em></h3>
+        <h5>$<c:out value="${product.price}"></c:out></h5>
+        <p class="card-text"><c:out value="${product.description}"></c:out></p>
+        <p class="card-text"><small class="text-muted">Category: <c:out value="${product.category.name}"></c:out></small></p>
+      <a href="${product.id}"><button class="btn btn-success" type="submit">Add to Cart</button></a>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+		
 				
 		</div>
-	</div>
 </body>
 </html>

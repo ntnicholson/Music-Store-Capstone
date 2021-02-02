@@ -22,7 +22,8 @@
 				<input type="text" name="name" class="form-control" required><br /></div>
 				
 				<div class="input-group mb-3">
-					<select class="form-select" name="category" aria-label="Default select example">
+				<span class="input-group-text" id="basic-addon1">Category</span> 
+					<select class="form-select" name="category" aria-label="Select a Category">
 					<c:forEach items="${categoryList}" var="categoryList">
 						<option value="${categoryList.id}"><c:out value="${categoryList.name}"></c:out></option>
 					</c:forEach>

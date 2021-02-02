@@ -121,7 +121,10 @@
 				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 					<h2>Manage Products</h2>
 						<div class="btn">
-						<a href="create"><button type="submit" name="manage" value="Create" class="btn btn-sm btn-success">Create</button></a>
+						<a href="create"><button type="submit" name="manage" value="Create" class="btn btn-sm btn-success">Create Product</button></a>
+							</div>
+							<div class="btn">
+						<a href="create/song"><button type="submit" name="manage" value="Create" class="btn btn-sm btn-success">Create Song</button></a>
 							</div>
 				</div>		
 						<%-- <div class="table-responsive"> --%>

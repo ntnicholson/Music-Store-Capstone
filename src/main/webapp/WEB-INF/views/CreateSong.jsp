@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+		<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
@@ -19,6 +20,15 @@
 			<div class="input-group mb-3">
 				<span class="input-group-text" id="basic-addon1">Name</span> 
 				<input type="text" name="name" class="form-control" required><br /></div>
+				
+				<div class="input-group mb-3">
+				<span class="input-group-text" id="basic-addon1">Category</span> 
+					<select class="form-select" name="category" aria-label="Select a Category">
+					<c:forEach items="${categoryList}" var="categoryList">
+						<option value="${categoryList.id}"><c:out value="${categoryList.name}"></c:out></option>
+					</c:forEach>
+					</select>
+				</div>
 
 			<div class="input-group mb-3">
 			<span class="input-group-text" id="basic-addon1">Image</span> 

@@ -1,5 +1,6 @@
 package com.capstone.controller;
 
+import java.io.IOException;
 import java.util.HashSet;
 
 import java.util.List;
@@ -56,8 +57,8 @@ public class AuthController {
 	@Autowired
 	JwtUtils jwtUtils;
 
-	@PostMapping("/signin")
-	public ResponseEntity<?> authenticateUser(@Valid LoginRequest loginRequest, HttpServletRequest request, HttpServletResponse response) { //@RequestBody
+	@PostMapping("/signin") //ResponseEntity<?>
+	public void authenticateUser(@Valid LoginRequest loginRequest, HttpServletRequest request, HttpServletResponse response) throws IOException { //@RequestBody
 
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -88,26 +89,29 @@ public class AuthController {
 		cookie.setPath("/");
 		
 		response.addCookie(cookie);
-
-		return ResponseEntity.ok(new JwtResponse(jwt, 
-												 userDetails.getId(), 
-												 userDetails.getUsername(), 
-												 userDetails.getEmail(), 
-												 roles));
+		response.sendRedirect("/home");
+//		return ResponseEntity.ok(new JwtResponse(jwt, 
+//												 userDetails.getId(), 
+//												 userDetails.getUsername(), 
+//												 userDetails.getEmail(), 
+//												 roles));
 	}
 
-	@PostMapping("/signup")
-	public ResponseEntity<?> registerUser(@Valid SignupRequest signUpRequest) {//@RequestBody
+	@PostMapping("/signup") //ResponseEntity<?>
+	public void registerUser(@Valid SignupRequest signUpRequest, HttpServletResponse response) throws IOException {//@RequestBody
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-			return ResponseEntity
-					.badRequest()
-					.body(new MessageResponse("Error: Username is already taken!"));
+			//response.getWriter();
+			response.sendError(0, "Username exists");
+//			return ResponseEntity
+//					.badRequest()
+//					.body(new MessageResponse("Error: Username is already taken!"));
 		}
 
 		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-			return ResponseEntity
-					.badRequest()
-					.body(new MessageResponse("Error: Email is already in use!"));
+			response.sendError(0, "Email exists");
+//			return ResponseEntity
+//					.badRequest()
+//					.body(new MessageResponse("Error: Email is already in use!"));
 		}
 
 		// Create new user's account
@@ -147,8 +151,8 @@ public class AuthController {
 
 		user.setRoles(roles);
 		userRepository.save(user);
-
-		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+		response.sendRedirect("/login");
+		//return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
 	private void saveSession(JwtResponse jwt, HttpServletRequest r) 
 	{

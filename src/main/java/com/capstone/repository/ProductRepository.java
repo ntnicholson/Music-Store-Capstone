@@ -12,6 +12,6 @@ import com.capstone.entity.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-	@Query("SELECT p FROM Product p WHERE LOWER(CONCAT(p.name, p.description)) LIKE %:query%")
+	@Query("SELECT p FROM Product p JOIN Category c ON p.category=c.id WHERE LOWER(CONCAT(p.name, p.description, c.name)) LIKE %:query%")
 	List<Product> search(@Param("query") String query);
 }

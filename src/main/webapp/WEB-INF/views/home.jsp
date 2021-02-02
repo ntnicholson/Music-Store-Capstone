@@ -30,10 +30,8 @@
           font-size: 3.5rem;
         }
         #carou img{
-	max-width:100%;
-max-height:100%;
-object-fit: contain;
-}
+object-fit: cover;
+
       }
     </style>
 
@@ -59,9 +57,6 @@ object-fit: contain;
           <li class="nav-item">
             <a class="nav-link" href="/product/catalog">Shop</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-          </li>
         </ul>
            <ul class="navbar-nav navbar-right">
           <li class="nav-item active">
@@ -86,15 +81,16 @@ object-fit: contain;
     </ol>
     <div class="carousel-inner" id="carou">
       <div class="carousel-item active">
-        <svg class="bd-placeholder-img" width="100%" height="100%"  aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/>
-        <image id="image" href="<c:url value="https://images.pexels.com/photos/1407322/pexels-photo-1407322.jpeg"/>"/>
+        <svg class="bd-placeholder-img" width="100%" height="100%"  aria-hidden="true" preserveAspectRatio="none" focusable="true">
+        <rect width="100%" height="100%" fill="#757"/>
+<%--         <image id="carou" width="100%" height="100%" style="object-fit:contain;" href="<c:url value=""/>"/> --%>
         </svg>
 
         <div class="container">
           <div class="carousel-caption text-start">
-            <h1>Example headline.</h1>
-            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+            <h1>What is Lorem Ipsum?</h1>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+            <p><a class="btn btn-lg btn-primary" href="/product/catalog" role="button">Shop Now</a></p>
           </div>
         </div>
       </div>

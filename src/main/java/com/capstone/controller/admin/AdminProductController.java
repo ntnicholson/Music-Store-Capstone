@@ -124,10 +124,13 @@ public class AdminProductController {
 	}
 	//Create
 	@GetMapping(value="/create/song")
-	public ModelAndView createSong() 
+	public ModelAndView createSong(ModelMap m) 
 	{
 		Product p = new Song();
-		return new ModelAndView("CreateSong", "newSong", p);
+		List<Category> categoryList = categoryService.findAll();
+		m.addAttribute("newSong", p);
+		m.addAttribute("categoryList", categoryList);
+		return new ModelAndView("CreateSong", "newSong", m);
 	}
 	@PostMapping(value="/create/song") @Transactional
 	public void saveSong(@Valid @ModelAttribute("newSong") Song p, BindingResult bindingResult, 
